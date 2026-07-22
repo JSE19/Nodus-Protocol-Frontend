@@ -1,8 +1,18 @@
+interface MockWindow {
+  window: {
+    freighter: {
+      isConnected: jest.Mock
+      getPublicKey: jest.Mock
+      signTransaction: jest.Mock
+    }
+  }
+}
+
 describe("stellar-auth URL construction", () => {
   const OLD = process.env
 
   beforeAll(() => {
-    ;(globalThis as any).window = {
+    ;(globalThis as unknown as MockWindow).window = {
       freighter: {
         isConnected: jest.fn(),
         getPublicKey: jest.fn().mockResolvedValue("GABC12345TESTACCOUNT"),
@@ -12,7 +22,7 @@ describe("stellar-auth URL construction", () => {
   })
 
   afterAll(() => {
-    delete (globalThis as any).window
+    delete (globalThis as unknown as MockWindow).window
   })
 
   beforeEach(() => {
