@@ -1,5 +1,5 @@
 interface MockWindow {
-  window: {
+  window?: {
     freighter: {
       isConnected: jest.Mock
       getPublicKey: jest.Mock
